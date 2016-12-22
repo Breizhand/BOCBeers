@@ -66,7 +66,7 @@ public class Application {
             return mongoClient.getDB("todoapp");
         }
         int port = Integer.parseInt(System.getenv("MONGODB_ADDON_PORT"));
-        String dbname = System.getenv("MONGODB_ADDON_DB")
+        String dbname = System.getenv("MONGODB_ADDON_DB");
         String username = System.getenv("MONGODB_DB_USER");
         String password = System.getenv("MONGODB_DB_PASSWORD");
         MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
