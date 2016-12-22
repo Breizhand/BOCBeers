@@ -4,6 +4,6 @@
     "goal": "package"
   },
   "deploy":{
-    "jarName": "target/beers-1.0-SNAPSHOT.jar"
+    "jarName": "target/HelloSpark-1.0-SNAPSHOT.jar"
   }
 }
