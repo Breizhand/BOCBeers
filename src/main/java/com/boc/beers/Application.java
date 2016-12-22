@@ -61,10 +61,6 @@ public class Application {
         return db;*/
 
         String host = System.getenv("MONGODB_ADDON_HOST");
-        if(host == null){
-            MongoClient mongoClient = new MongoClient("localhost");
-            return mongoClient.getDB("todoapp");
-        }
         int port = Integer.parseInt(System.getenv("MONGODB_ADDON_PORT"));
         String dbname = System.getenv("MONGODB_ADDON_DB");
         String username = System.getenv("MONGODB_ADDON_USER");
@@ -77,7 +73,7 @@ public class Application {
         if (db.authenticate(username, password.toCharArray())){
             return db;
         } else {
-            throw new RuntimeException("Not able to authenticate with MondoDB")
+            throw new RuntimeException("Not able to authenticate with MondoDB");
         }
     }
 }
