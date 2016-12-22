@@ -45,7 +45,7 @@ public class Application {
 
 
     private static DB mongo() throws Exception{
-        String host = "127.0.0.1";
+        /*String host = "127.0.0.1";
         if(host == null){
             MongoClient mongoClient = new MongoClient("localhost");
             return mongoClient.getDB("todoapp");
@@ -58,6 +58,26 @@ public class Application {
         MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
         mongoClient.setWriteConcern(WriteConcern.SAFE);
         DB db = mongoClient.getDB(dbname);
-        return db;
+        return db;*/
+
+        String host = System.getenv("MONGODB_ADDON_HOST");
+        if(host == null){
+            MongoClient mongoClient = new MongoClient("localhost");
+            return mongoClient.getDB("todoapp");
+        }
+        int port = Integer.parseInt(System.getenv("MONGODB_ADDON_PORT"));
+        String dbname = System.getenv("MONGODB_ADDON_DB")
+        String username = System.getenv("MONGODB_DB_USER");
+        String password = System.getenv("MONGODB_DB_PASSWORD");
+        MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
+        MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
+        mongoClient.setWriteConcern(WriteConcern.SAFE);
+        DB db = mongoClient.getDB(dbname);
+
+        if (db.authenticate(username, password.toCharArray())){
+            return db;
+        } else {
+            throw new RuntimeException("Not able to authenticate with MondoDB")
+        }
     }
 }
