@@ -45,21 +45,6 @@ public class Application {
 
 
     private static DB mongo() throws Exception{
-        /*String host = "127.0.0.1";
-        if(host == null){
-            MongoClient mongoClient = new MongoClient("localhost");
-            return mongoClient.getDB("todoapp");
-        }
-        int port = 27017;
-        String dbname = "HelloSpark";
-        String username = System.getenv("MONGODB_DB_USERNAME");
-        String password = System.getenv("MONGODB_DB_PASSWORD");
-        MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
-        MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
-        mongoClient.setWriteConcern(WriteConcern.SAFE);
-        DB db = mongoClient.getDB(dbname);
-        return db;*/
-
         String host = System.getenv("MONGODB_ADDON_HOST");
         int port = Integer.parseInt(System.getenv("MONGODB_ADDON_PORT"));
         String dbname = System.getenv("MONGODB_ADDON_DB");
@@ -70,10 +55,12 @@ public class Application {
         mongoClient.setWriteConcern(WriteConcern.SAFE);
         DB db = mongoClient.getDB(dbname);
 
-        if (db.authenticate(username, password.toCharArray())){
+        if (db.authenticate(username, password.toCharArray())) {
+            System.out.print("authentication done!");
             return db;
         } else {
-            throw new RuntimeException("Not able to authenticate with MondoDB");
+            throw new RuntimeException("Not able to authenticate with MongoDB");
         }
     }
 }
+Z
