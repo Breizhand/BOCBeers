@@ -67,8 +67,8 @@ public class Application {
         }
         int port = Integer.parseInt(System.getenv("MONGODB_ADDON_PORT"));
         String dbname = System.getenv("MONGODB_ADDON_DB");
-        String username = System.getenv("MONGODB_DB_USER");
-        String password = System.getenv("MONGODB_DB_PASSWORD");
+        String username = System.getenv("MONGODB_ADDON_USER");
+        String password = System.getenv("MONGODB_ADDON_PASSWORD");
         MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
         MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
         mongoClient.setWriteConcern(WriteConcern.SAFE);
